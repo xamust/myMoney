@@ -1,0 +1,18 @@
+pre-commit:
+  commands:
+    lint-revive:
+      priority: 0
+      stage_fixed: true
+      glob: "*.go"
+      run: revive -config ./.revive.toml ./...
+    lint-backend-golangci:
+      priority: 1
+      stage_fixed: true
+      glob: "*.go"
+      run: golangci-lint run ./...
+    format:
+      priority: 2
+      stage_fixed: true
+      glob: "*.go"
+      run: >
+        make format
