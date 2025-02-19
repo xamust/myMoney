@@ -7,24 +7,21 @@ import (
 )
 
 type Config struct {
-	App  `yaml:"app"`
-	HTTP `yaml:"http"`
-	Log  `yaml:"logger"`
-	DB   `yaml:"databases"`
-	RMQ  `yaml:"rabbitmq"`
+	App  App  `yaml:"app"`
+	HTTP HTTP `yaml:"http"`
+	Log  Log  `yaml:"logger"`
+	DB   DB   `yaml:"databases"`
+	RMQ  RMQ  `yaml:"rabbitmq"`
 }
 
 // NewConfig returns app config (read from root).
 func NewConfig() (*Config, error) {
+	var err error
 	cfg := &Config{}
-
-	err := cleanenv.ReadConfig("./config.yml", cfg)
-	if err != nil {
+	if err = cleanenv.ReadConfig("./config.yaml", cfg); err != nil {
 		return nil, fmt.Errorf("config error: %w", err)
 	}
-
-	err = cleanenv.ReadEnv(cfg)
-	if err != nil {
+	if err = cleanenv.ReadEnv(cfg); err != nil {
 		return nil, err
 	}
 
