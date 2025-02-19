@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/xamust/myMoney.git/config"
+	"github.com/xamust/myMoney.git/internal/app"
 	"log"
 )
 
@@ -11,7 +12,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Config error: %s", err)
 	}
-	_ = cfg
 	// Run App
-	// ...
+	app.Run(cfg)
 }
